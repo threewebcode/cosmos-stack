@@ -42,4 +42,4 @@ git clone -b v0.34.12 https://gitee.com/wonderfan/tendermint.git
 cd tendermint
 make build
 ./build/tendermint init --home mychain
-./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug
+./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval=5s
