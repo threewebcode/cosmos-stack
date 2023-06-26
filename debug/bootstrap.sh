@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+function install_dependencies(){
+  sudo apt update
+  sudo apt install jq
+}
+
+function clone_code(){
+
+}
+
+function lanuch_solo(){
+
+}
+
 git clone -b v0.43.0 https://gitee.com/wonderfan/cosmos-sdk.git
 cd cosmos-sdk
 make build
