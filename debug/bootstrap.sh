@@ -9,7 +9,7 @@ function clone_code(){
 
 }
 
-function lanuch_solo(){
+function launch_solo(){
 
 }
 
