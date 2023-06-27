@@ -13,6 +13,7 @@ function lanuch_solo(){
 
 }
 
+# Cosmos-SDK
 git clone -b v0.43.0 https://gitee.com/wonderfan/cosmos-sdk.git
 cd cosmos-sdk
 make build
@@ -31,15 +32,17 @@ make build
 ./build/simd unsafe-reset-all --home mychain
 sed -i '357s/true/false/g' mychain/config/config.toml
 sed -i '358s/0s/5s/g' mychain/config/config.toml
-./build/simd start --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval 5s --home mychain --log_level debug
+./build/simd start --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval="5s" --home mychain --log_level debug
 
-./build/simd query bank balances cosmos1qm6ygukulj7xp92r4c60s76lvd0xtw74sefxn2 --home mychain
-./build/simd query bank balances cosmos129ggjn9u8h0huue2rhzvtfqrmazlz0s9cj5m75 --home mychain
+./build/simd query bank balances cosmos19wlfffyx6azhuzrpu4rl54mnddnyktzr0rt8zq --home mychain
+./build/simd query bank balances cosmos1r0ffxtdcv3s27wvsfsck7swxt308y8qq4w5jgr --home mychain
 
 # Tendermint
 
-git clone -b v0.34.12 https://gitee.com/wonderfan/tendermint.git
+git clone -b v0.34.11 https://gitee.com/wonderfan/tendermint.git
 cd tendermint
 make build
 ./build/tendermint init --home mychain
-./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval=5s
+./build/tendermint unsafe-reset-all --home mychain
+./build/tendermint start --proxy_app=noop --home mychain --log_level=debug
+./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval="5s"
