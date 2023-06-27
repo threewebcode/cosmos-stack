@@ -32,7 +32,8 @@ make build
 ./build/simd unsafe-reset-all --home mychain
 sed -i '357s/true/false/g' mychain/config/config.toml
 sed -i '358s/0s/5s/g' mychain/config/config.toml
-./build/simd start --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval="5s" --home mychain --log_level debug
+./build/simd start --home mychain --log_level debug
+./build/simd start --consensus.create_empty_blocks=false --home mychain --log_level debug
 
 ./build/simd query bank balances cosmos19wlfffyx6azhuzrpu4rl54mnddnyktzr0rt8zq --home mychain
 ./build/simd query bank balances cosmos1r0ffxtdcv3s27wvsfsck7swxt308y8qq4w5jgr --home mychain
@@ -40,9 +41,13 @@ sed -i '358s/0s/5s/g' mychain/config/config.toml
 # Tendermint
 
 git clone -b v0.34.11 https://gitee.com/wonderfan/tendermint.git
+git clone -b v0.34.11 https://github.com/tendermint/tendermint.git
 cd tendermint
 make build
 ./build/tendermint init --home mychain
 ./build/tendermint unsafe-reset-all --home mychain
-./build/tendermint start --proxy_app=noop --home mychain --log_level=debug
-./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug --consensus.create_empty_blocks=false --consensus.create_empty_blocks_interval="5s"
+./build/tendermint start --proxy_app=noop --home mychain --log_level=debug --consensus.create_empty_blocks=false
+./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug --consensus.create_empty_blocks=false 
+
+curl http://localhost:26657/block?height=1
+
