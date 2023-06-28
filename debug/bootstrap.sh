@@ -47,7 +47,7 @@ make build
 ./build/tendermint init --home mychain
 ./build/tendermint unsafe-reset-all --home mychain
 ./build/tendermint start --proxy_app=noop --home mychain --log_level=debug --consensus.create_empty_blocks=false
-./build/tendermint start --proxy_app=kvstore --home mychain --log_level=debug --consensus.create_empty_blocks=false 
+./build/tendermint start --proxy_app=kvstore --home mychain --log_level=error --consensus.create_empty_blocks=false
+./build/tendermint start --proxy_app=kvstore --home mychain --consensus.create_empty_blocks=false
 
 curl http://localhost:26657/block?height=1
-
